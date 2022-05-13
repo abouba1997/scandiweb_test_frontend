@@ -1,0 +1,49 @@
+.row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 0.5rem 0;
+}
+.col-25 {
+  width: 25%;
+}
+
+.col-75 {
+  width: 75%;
+}
+
+.error__display {
+  color: #ff0000;
+  font-size: .9rem;
+}
+
+input[type="text"],
+input[type="number"],
+select,
+textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+  font-size: 1rem;
+}
+
+label {
+  font-size: 1.2rem;
+  padding: 12px 12px 12px 0;
+  display: inline-block;
+}
+
+.row__description {
+  width: 85%;
+  float: right;
+  display: flex;
+  flex-direction: column;
+}
+
+@media screen and (max-width: 550px) {
+  .row {
+    flex-direction: column;
+  }
+}

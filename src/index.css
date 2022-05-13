@@ -1,0 +1,79 @@
+@import url(https://fonts.googleapis.com/css?family=Poppins:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic);
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #ffffff;
+  font-size: 16px;
+  font-family: "Poppins", sans-serif;
+}
+
+.header {
+  display: flex;
+  position: relative;
+  padding-top: 2.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.header__container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 1.2rem;
+  margin-right: 1.2rem;
+  width: 100%;
+}
+
+.header::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  width: 100%;
+  background-color: #000;
+  border-radius: 0 0 100px 100px;
+}
+
+.header__buttons {
+  display: flex;
+}
+
+.header__buttons-add .btn__submit,
+.header__buttons-add .btn__submit a {
+  text-decoration: none;
+  background-color: transparent;
+  color: #000;
+  transition: all .5s ease;
+}
+
+.header__buttons-add .btn__submit:hover {
+  background-color: #cccccc;
+}
+
+.header__buttons-delete .btn__cancel {
+  background-color: #ff3838;
+  color: #ffffff;
+  transition: all .3s ease;
+}
+
+.header__buttons-delete .btn__cancel:hover {
+  background-color: #d60000;
+}
+
+.header__buttons-add .btn__submit,
+.header__buttons-delete .btn__cancel {
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+  padding: 0.2rem 1rem;
+  border: 2px solid #5f5f5f;
+  border-radius: 3px;
+  box-shadow: 6px 2px 3px 0px rgba(0, 0, 0, 0.63);
+  cursor: pointer;
+}

@@ -19,7 +19,6 @@ const Main = () => {
   };
 
   useEffect(() => {
-    console.log("rerendered");
     getData();
   }, [massDeleteClicked]);
 

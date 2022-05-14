@@ -17,8 +17,6 @@ const initialState = {
   length: "",
 };
 
-const API_URL = "https://scandiwebtestphpmysql.herokuapp.com/";
-
 const AddForm = () => {
   const [formData, setFormData] = useState(initialState);
   const [errors, setErrors] = useState({});
@@ -47,7 +45,7 @@ const AddForm = () => {
 
     setFormData(data);
 
-    const response = await axios.post(API_URL + "product/create", formData);
+    const response = await axios.post("https://scandiwebtestphpmysql.herokuapp.com/product/create", formData);
     if (response.data) {
       setFormData(initialState);
     }

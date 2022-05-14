@@ -4,8 +4,6 @@ import axios from "axios";
 import Product from "../Product/Product";
 import "./Main.css";
 
-const API_URL = "https://scandiwebtestphpmysql.herokuapp.com/";
-
 const Main = () => {
   const location = useLocation();
   const [products, setProducts] = useState([]);
@@ -15,7 +13,7 @@ const Main = () => {
   useEffect(() => {
     return async () => {
       await axios
-        .get(API_URL + "products")
+        .get("https://scandiwebtestphpmysql.herokuapp.com/products")
         .then((response) => setProducts(response.data));
       };
   }, [massDeleteChange]);
@@ -28,7 +26,7 @@ const Main = () => {
     }
     // send the delete request to the database
     const myData = Object.assign({}, Array.from(deleted));
-    await axios.post(API_URL + "products/delete", myData);
+    await axios.post("https://scandiwebtestphpmysql.herokuapp.com/products/delete", myData);
   };
 
   return (

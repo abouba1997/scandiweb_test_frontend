@@ -1,3 +1,5 @@
+import React from "react";
+import { flushSync } from "react-dom";
 import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -7,26 +9,40 @@ import "./Main.css";
 const Main = () => {
   const location = useLocation();
   const [products, setProducts] = useState([]);
-  const [massDeleteChange, setMassDeleteChange] = useState(false);
   const [deleted, setDeleted] = useState(new Set());
+  const [massDeleteClicked, setMassDeleteClicked] = useState(false);
+
+  const getData = async () => {
+    await axios
+      .get("https://scandiwebtestphpmysql.herokuapp.com/products")
+      .then((response) => setProducts(response.data));
+  };
 
   useEffect(() => {
-    return async () => {
-      await axios
-        .get("https://scandiwebtestphpmysql.herokuapp.com/products")
-        .then((response) => setProducts(response.data));
-      };
-  }, [massDeleteChange]);
+    console.log("rerendered");
+    getData();
+  }, [massDeleteClicked]);
+
+  const deleteFunction = async () => {
+    // send the delete request to the database
+    const myData = Object.assign({}, Array.from(deleted));
+    await axios.post(
+      "https://scandiwebtestphpmysql.herokuapp.com/products/delete",
+      myData
+    );
+
+    
+    flushSync(() => {
+      setMassDeleteClicked(!massDeleteClicked);
+    });
+  };
 
   const massDeleteHandle = async () => {
-    setMassDeleteChange((prevState) => !prevState);
-
+    deleteFunction();
+    
     if (location === "/") {
       setDeleted(new Set());
     }
-    // send the delete request to the database
-    const myData = Object.assign({}, Array.from(deleted));
-    await axios.post("https://scandiwebtestphpmysql.herokuapp.com/products/delete", myData);
   };
 
   return (
@@ -55,13 +71,15 @@ const Main = () => {
         </div>
       </div>
       <div className="main">
-        {products.length ? products.map((product, index) => (
-          <Product
-            product_data={product}
-            key={index}
-            massDeleteProducts={deleted}
-          />
-        )): "No retrieving data..."}
+        {products.length
+          ? products.map((product, index) => (
+              <Product
+                product_data={product}
+                key={index}
+                massDeleteProducts={deleted}
+              />
+            ))
+          : "No retrieving data..."}
       </div>
       <div className="footer">
         <p className="footer__message">Scandiweb Test assignment</p>

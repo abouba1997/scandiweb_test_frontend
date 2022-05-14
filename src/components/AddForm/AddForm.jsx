@@ -1,3 +1,4 @@
+import React from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -17,6 +18,7 @@ const AddForm = () => {
     width: "",
     length: "",
   });
+
   const [errors, setErrors] = useState({});
   const errorsObject = {};
 
@@ -32,6 +34,10 @@ const AddForm = () => {
 
     const data = await addFormSchema
       .validate(formData, { abortEarly: false })
+      .then((dat) => {
+        setFormData(dat);
+        return true;
+      })
       .catch((err) => {
         for (let index = 0; index < err.inner.length; index++) {
           const path = err.inner[index].path;
@@ -39,26 +45,29 @@ const AddForm = () => {
           errorsObject[path] = message;
         }
         setErrors(errorsObject);
+        return false;
       });
-
-    setFormData(data);
-
-    const response = await axios.post(
-      "https://scandiwebtestphpmysql.herokuapp.com/product/create",
-      formData
-    );
-    if (response.data) {
-      setFormData({
-        sku: "",
-        name: "",
-        price: "",
-        productType: "",
-        size: "",
-        weight: "",
-        height: "",
-        width: "",
-        length: "",
-      });
+      
+    if (data) {
+      await axios.post(
+        "https://scandiwebtestphpmysql.herokuapp.com/product/create",
+        formData
+      )
+      .then(() => {
+        setFormData({
+          sku: "",
+          name: "",
+          price: "",
+          productType: "",
+          size: "",
+          weight: "",
+          height: "",
+          width: "",
+          length: "",
+        });
+        setErrors({});
+      })
+      .catch(err => console.log(err));
     }
   };
 
@@ -111,8 +120,8 @@ const AddForm = () => {
             id={"sku"}
             name={"sku"}
             placeholder={"SKU..."}
-            value={formData?.sku}
             onChange={handleChange}
+            value={formData.sku}
             error={errors.sku}
           />
           <Field
@@ -121,8 +130,8 @@ const AddForm = () => {
             id={"name"}
             name={"name"}
             placeholder={"Product Name..."}
-            value={formData.name}
             onChange={handleChange}
+            value={formData.name}
             error={errors.name}
           />
           <Field
@@ -131,8 +140,8 @@ const AddForm = () => {
             id={"price"}
             name={"price"}
             placeholder={"Product price..."}
-            value={formData.price}
             onChange={handleChange}
+            value={formData.price}
             error={errors.price}
           />
           <div className="row">
@@ -146,8 +155,8 @@ const AddForm = () => {
                 name="productType"
                 id="productType"
                 placeholder=""
-                value={formData.productType}
                 onChange={handleChange}
+                value={formData.productType}
               >
                 <option value="" id="" disabled defaultValue>
                   Type Switcher
@@ -176,8 +185,8 @@ const AddForm = () => {
                 id={"size"}
                 name={"size"}
                 placeholder={"Size of DVD..."}
-                value={formData.size}
                 onChange={handleChange}
+                value={formData.size}
                 error={errors.size}
               />
               <p className="row__p">
@@ -197,8 +206,8 @@ const AddForm = () => {
                 name={"weight"}
                 placeholder={"Weight of Book..."}
                 value={formData.weight}
-                onChange={handleChange}
                 error={errors.weight}
+                onChange={handleChange}
               />
               <p className="row__p">
                 Specify please the weight of the book in KG.

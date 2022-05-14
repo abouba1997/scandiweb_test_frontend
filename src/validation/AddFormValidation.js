@@ -6,7 +6,7 @@ export const addFormSchema = yup.object().shape({
   price: yup.number().min(0).typeError('Please, provide the price'),
   productType: yup.string().required("Please, provide the type of the product"),
   size: yup.string().when("productType", {
-    is: "DVD-disc",
+    is: "DVD",
     then: yup.string().required("Please, provide the size of the dvd"),
   }),
   weight: yup.string().when("productType", {

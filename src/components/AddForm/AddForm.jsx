@@ -161,7 +161,7 @@ const AddForm = () => {
                 <option value="" id="" disabled defaultValue>
                   Type Switcher
                 </option>
-                <option value="DVD-disc" id="DVD">
+                <option value="DVD" id="DVD">
                   DVD-disc
                 </option>
                 <option value="Book" id="Book">

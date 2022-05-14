@@ -5,20 +5,18 @@ import Field from "../Field/Field";
 import { addFormSchema } from "../../validation/AddFormValidation";
 import "./AddForm.css";
 
-const initialState = {
-  sku: "",
-  name: "",
-  price: "",
-  productType: "",
-  size: "",
-  weight: "",
-  height: "",
-  width: "",
-  length: "",
-};
-
 const AddForm = () => {
-  const [formData, setFormData] = useState(initialState);
+  const [formData, setFormData] = useState({
+    sku: "",
+    name: "",
+    price: "",
+    productType: "",
+    size: "",
+    weight: "",
+    height: "",
+    width: "",
+    length: "",
+  });
   const [errors, setErrors] = useState({});
   const errorsObject = {};
 
@@ -45,14 +43,37 @@ const AddForm = () => {
 
     setFormData(data);
 
-    const response = await axios.post("https://scandiwebtestphpmysql.herokuapp.com/product/create", formData);
+    const response = await axios.post(
+      "https://scandiwebtestphpmysql.herokuapp.com/product/create",
+      formData
+    );
     if (response.data) {
-      setFormData(initialState);
+      setFormData({
+        sku: "",
+        name: "",
+        price: "",
+        productType: "",
+        size: "",
+        weight: "",
+        height: "",
+        width: "",
+        length: "",
+      });
     }
   };
 
   const cancelHandle = () => {
-    setFormData(initialState);
+    setFormData({
+      sku: "",
+      name: "",
+      price: "",
+      productType: "",
+      size: "",
+      weight: "",
+      height: "",
+      width: "",
+      length: "",
+    });
     setErrors({});
   };
 
@@ -90,7 +111,7 @@ const AddForm = () => {
             id={"sku"}
             name={"sku"}
             placeholder={"SKU..."}
-            value={formData.sku}
+            value={formData?.sku}
             onChange={handleChange}
             error={errors.sku}
           />

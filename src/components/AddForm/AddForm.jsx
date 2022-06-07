@@ -172,26 +172,6 @@ const AddForm = () => {
           </div>
           <hr />
 
-          {/* Here goes the dynamic changing of the form (dvd-disc) */}
-
-          {formData.productType === "DVD" && (
-            <div className="row__description">
-              <Field
-                text={"Size (MB)"}
-                type={"number"}
-                id={"size"}
-                name={"size"}
-                placeholder={"Size of DVD..."}
-                onChange={handleChange}
-                value={formData.size}
-                error={errors.size}
-              />
-              <p className="row__p">
-                Specify please the size of the DVD-disk in MB.
-              </p>
-            </div>
-          )}
-
           {/* Here goes the dynamic changing of the form (book) */}
 
           {formData.productType === "Book" && (
@@ -208,6 +188,26 @@ const AddForm = () => {
               />
               <p className="row__p">
                 Specify please the weight of the book in KG.
+              </p>
+            </div>
+          )}
+          
+          {/* Here goes the dynamic changing of the form (dvd-disc) */}
+
+          {formData.productType === "DVD" && (
+            <div className="row__description">
+              <Field
+                text={"Size (MB)"}
+                type={"number"}
+                id={"size"}
+                name={"size"}
+                placeholder={"Size of DVD..."}
+                onChange={handleChange}
+                value={formData.size}
+                error={errors.size}
+              />
+              <p className="row__p">
+                Specify please the size of the DVD-disk in MB.
               </p>
             </div>
           )}

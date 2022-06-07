@@ -96,12 +96,12 @@ const AddForm = () => {
           <div className="header__buttons">
             <div className="header__buttons-add">
               <button type="submit" form="product_form" className="btn__submit">
-                SAVE
+                Save
               </button>
             </div>
             <div className="header__buttons-delete" id="delete-product-btn">
               <button className="btn__cancel" onClick={cancelHandle}>
-                CANCEL
+                Cancel
               </button>
             </div>
             <div className="header__buttons-add">
@@ -149,7 +149,6 @@ const AddForm = () => {
               <label htmlFor="productType">Type Switcher</label>
             </div>
             <div className="col-75">
-              {/* {errors.productType === 'undefined' ? '' : <span className="error__display">{errors["productType"]}</span>} */}
               <span className="error__display">{errors.productType}</span>
               <select
                 name="productType"
@@ -177,7 +176,7 @@ const AddForm = () => {
 
           {/* Here goes the dynamic changing of the form (dvd-disc) */}
 
-          {formData.productType === "DVD-disc" && (
+          {formData.productType === "DVD" && (
             <div className="row__description">
               <Field
                 text={"Size (MB)"}

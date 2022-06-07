@@ -47,27 +47,28 @@ const AddForm = () => {
         setErrors(errorsObject);
         return false;
       });
-      
+
     if (data) {
-      await axios.post(
-        "https://scandiwebtestphpmysql.herokuapp.com/product/create",
-        formData
-      )
-      .then(() => {
-        setFormData({
-          sku: "",
-          name: "",
-          price: "",
-          productType: "",
-          size: "",
-          weight: "",
-          height: "",
-          width: "",
-          length: "",
-        });
-        setErrors({});
-      })
-      .catch(err => console.log(err));
+      await axios
+        .post(
+          "https://scandiwebtestphpmysql.herokuapp.com/product/create",
+          formData
+        )
+        .then(() => {
+          setFormData({
+            sku: "",
+            name: "",
+            price: "",
+            productType: "",
+            size: "",
+            weight: "",
+            height: "",
+            width: "",
+            length: "",
+          });
+          setErrors({});
+        })
+        .catch((err) => console.log(err));
     }
   };
 
@@ -100,13 +101,10 @@ const AddForm = () => {
               </button>
             </div>
             <div className="header__buttons-delete" id="delete-product-btn">
-              <button className="btn__cancel" onClick={cancelHandle}>
-                Cancel
-              </button>
-            </div>
-            <div className="header__buttons-add">
               <Link to="/">
-                <button className="btn__submit">Home</button>
+                <button className="btn__cancel" onClick={cancelHandle}>
+                  Cancel
+                </button>
               </Link>
             </div>
           </div>
@@ -157,7 +155,7 @@ const AddForm = () => {
                 onChange={handleChange}
                 value={formData.productType}
               >
-                <option value="" id="" disabled defaultValue>
+                <option value="" disabled defaultValue>
                   Type Switcher
                 </option>
                 <option value="DVD" id="DVD">

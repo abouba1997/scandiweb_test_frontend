@@ -15,7 +15,7 @@ const Product = ({ product_data, massDeleteProducts }) => {
 
   return (
     <label className="card">
-      <input className="delete_checkbox" type="checkbox" onChange={checkedBox}/>
+      <input className="delete-checkbox" type="checkbox" onChange={checkedBox}/>
       <div className="card__body">
         <div className="card__body-cover">
           <p>{product_data.product_sku}</p>

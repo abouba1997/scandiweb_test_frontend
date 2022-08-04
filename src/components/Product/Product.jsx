@@ -21,7 +21,7 @@ const Product = ({ product_data, massDeleteProducts }) => {
           <p>{product_data.product_sku}</p>
           <p>{product_data.product_name}</p>
           <p>{product_data.product_price} $</p>
-          {product_data.product_type === "DVD" && (
+          {product_data.product_type === "Dvd" && (
             <p>Size: {product_data.dvd_size} MB</p>
           )}
           {product_data.product_type === "Book" && (

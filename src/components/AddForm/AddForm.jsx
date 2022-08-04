@@ -6,6 +6,9 @@ import Field from "../Field/Field";
 import { addFormSchema } from "../../validation/AddFormValidation";
 import "./AddForm.css";
 
+const POST_URL = "https://scandiwebtestphpmysql.herokuapp.com/product/create";
+// const POST_URL = "http://localhost:8000/product/create";
+
 const AddForm = () => {
   const [formData, setFormData] = useState({
     sku: "",
@@ -51,7 +54,7 @@ const AddForm = () => {
     if (data) {
       await axios
         .post(
-          "https://scandiwebtestphpmysql.herokuapp.com/product/create",
+          POST_URL,
           formData
         )
         .then(() => {
@@ -158,7 +161,7 @@ const AddForm = () => {
                 <option value="" disabled defaultValue>
                   Type Switcher
                 </option>
-                <option value="DVD" id="DVD">
+                <option value="Dvd" id="DVD">
                   DVD-disc
                 </option>
                 <option value="Book" id="Book">
@@ -194,7 +197,7 @@ const AddForm = () => {
           
           {/* Here goes the dynamic changing of the form (dvd-disc) */}
 
-          {formData.productType === "DVD" && (
+          {formData.productType === "Dvd" && (
             <div className="row__description">
               <Field
                 text={"Size (MB)"}

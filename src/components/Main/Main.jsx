@@ -6,6 +6,11 @@ import axios from "axios";
 import Product from "../Product/Product";
 import "./Main.css";
 
+const GET_URL = "https://scandiwebtestphpmysql.herokuapp.com/products";
+const DELETE_URL = "https://scandiwebtestphpmysql.herokuapp.com/products/delete";
+// const GET_URL = "http://localhost:8000/products";
+// const DELETE_URL = "http://localhost:8000/products/delete";
+
 const Main = () => {
   const location = useLocation();
   const [products, setProducts] = useState([]);
@@ -14,7 +19,7 @@ const Main = () => {
 
   const getData = async () => {
     await axios
-      .get("https://scandiwebtestphpmysql.herokuapp.com/products")
+      .get(GET_URL)
       .then((response) => setProducts(response.data));
   };
 
@@ -26,7 +31,7 @@ const Main = () => {
     // send the delete request to the database
     const myData = Object.assign({}, Array.from(deleted));
     await axios.post(
-      "https://scandiwebtestphpmysql.herokuapp.com/products/delete",
+      DELETE_URL,
       myData
     );
 
